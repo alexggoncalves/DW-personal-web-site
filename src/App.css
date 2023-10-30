@@ -8,7 +8,7 @@
   margin: 0 auto;
   padding: 0;
   text-align: center;
-  color: white;
+  background-color: #1B1D2A;
 }
 
 canvas {
@@ -16,14 +16,17 @@ canvas {
 }
 
 .ascii-grid {
-  position: sticky;
+  position: absolute;
   top: 0;
+  left: 0;
+  
   width: 100vw;
-  height: 100vh;
-  background: black;
-  z-index: -1;
+  height: 100%;
+  z-index: 1;
 }
 
 section { 
+  z-index: 2;
   color: white;
+  height: 100vh;
 }

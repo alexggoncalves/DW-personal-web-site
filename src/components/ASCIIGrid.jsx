@@ -7,8 +7,8 @@ const ASCIIGrid = () => {
     let hResolution;
     let vResolution;
 
-    const cellWidth = 8;
-    const cellHeight = 10;
+    const cellWidth = 12;
+    const cellHeight = 15;
 
     let grid;
 
@@ -40,7 +40,7 @@ const ASCIIGrid = () => {
 
         if (i >= grid.size || j >= grid[0].size || grid[i][j] != null) return;
 
-        grid[i][j] = new Char(i * cellWidth, j * cellHeight);
+        grid[i][j] = new Char(i * cellWidth, j * cellHeight + window.scrollY);
     };
 
     useEffect(() => {
@@ -52,8 +52,6 @@ const ASCIIGrid = () => {
             );
         };
         generateGrid();
-
-        grid = [...Array(hResolution)].map(() => Array(vResolution).fill(null));
 
         window.addEventListener("resize", generateGrid);
         window.addEventListener("mousemove", handleMouseMove);
@@ -69,6 +67,7 @@ const ASCIIGrid = () => {
             setup={setupASCIIGrid}
             draw={drawASCIIGrid}
             className={"ascii-grid"}
+            fullPage
         />
     );
 };
