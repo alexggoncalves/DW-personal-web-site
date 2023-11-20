@@ -1,5 +1,6 @@
 import "./App.css";
 import ASCIIGrid from './components/ASCIIGrid'
+import ASCIIImage from './components/ASCIIImage'
 
 function App() {
     

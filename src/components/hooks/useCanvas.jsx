@@ -1,6 +1,6 @@
 import { useRef, useEffect } from "react"
 
-const useCanvas = (draw,setup) => {
+const useCanvas = (setup,draw) => {
     const canvasRef = useRef(null)
 
     const resizeCanvasToDisplaySize = (canvas) => {
@@ -22,7 +22,7 @@ const useCanvas = (draw,setup) => {
         let frameCount = 0
         let animationFrameId
 
-        setup(context)
+        if(frameCount == 0) setup(context)
 
         const render = (elapsed) => {
             frameCount++

@@ -1,21 +1,24 @@
 import { useEffect } from "react";
 import Canvas from "./Canvas";
 import Char from "./Char";
+import ASCIIImage from "./ASCIIImage.js"
 
 const ASCIIGrid = () => {
     let size = { width: 0, height: 0 };
-    let hResolution;
-    let vResolution;
+    let hResolution
+    let vResolution
 
-    const cellWidth = 12;
-    const cellHeight = 15;
+    const cellWidth = 8;
+    const cellHeight = 8;
 
-    let grid;
+    let grid
+
+    let image1
 
     const setupASCIIGrid = (ctx) => {
         ctx.font = `${cellHeight}px Fira Code`;
-
         ctx.textAlign = "center";
+        
     };
 
     const drawASCIIGrid = (ctx, frameCount) => {
@@ -32,6 +35,13 @@ const ASCIIGrid = () => {
                 }
             }
         }
+
+        if(image1){
+            
+           image1.drawOnGrid(hResolution/2,vResolution/2,grid,cellWidth,cellHeight) 
+
+
+        }
     };
 
     const handleMouseMove = (e) => {
@@ -40,7 +50,7 @@ const ASCIIGrid = () => {
 
         if (i >= grid.size || j >= grid[0].size || grid[i][j] != null) return;
 
-        grid[i][j] = new Char(i * cellWidth, j * cellHeight + window.scrollY);
+        grid[i][j] = new Char(i * cellWidth, j * cellHeight + window.scrollY,200);
     };
 
     useEffect(() => {
@@ -53,6 +63,10 @@ const ASCIIGrid = () => {
         };
         generateGrid();
 
+        // Create images to be translated into ascii
+        image1 = new ASCIIImage("src/assets/catPixelated.png")
+
+
         window.addEventListener("resize", generateGrid);
         window.addEventListener("mousemove", handleMouseMove);
 
@@ -60,6 +74,7 @@ const ASCIIGrid = () => {
             window.removeEventListener("resize", generateGrid);
             window.removeEventListener("mouseMove", handleMouseMove);
         };
+        
     }, []);
 
     return (
@@ -67,7 +82,6 @@ const ASCIIGrid = () => {
             setup={setupASCIIGrid}
             draw={drawASCIIGrid}
             className={"ascii-grid"}
-            fullPage
         />
     );
 };

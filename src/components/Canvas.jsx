@@ -2,11 +2,9 @@ import useCanvas from './hooks/useCanvas'
 
 const Canvas = (props) => {
 
-    const { setup, draw, fullpage, ...rest } = props;
+    const { setup, draw, ...rest } = props;
 
-    const canvasRef = useCanvas(draw,setup)
-
-    
+    const canvasRef = useCanvas(setup,draw)
 
     return <canvas ref={canvasRef}  {...rest} />;
 };
