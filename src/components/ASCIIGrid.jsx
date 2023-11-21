@@ -11,6 +11,8 @@ const ASCIIGrid = () => {
     const cellWidth = 8;
     const cellHeight = 8;
 
+    const { devicePixelRatio:ratio=1 } = window
+
     let grid
 
     let image1
@@ -38,7 +40,7 @@ const ASCIIGrid = () => {
 
         if(image1){
             
-           image1.drawOnGrid(hResolution/2,vResolution/2,grid,cellWidth,cellHeight) 
+           image1.drawOnGrid(hResolution/(3*devicePixelRatio),vResolution/(2*devicePixelRatio),grid,cellWidth,cellHeight) 
 
 
         }

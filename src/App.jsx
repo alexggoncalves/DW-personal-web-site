@@ -1,20 +1,37 @@
 import "./App.css";
-import ASCIIGrid from './components/ASCIIGrid'
-import ASCIIImage from './components/ASCIIImage'
+
+import { useRef } from "react";
+
+import ASCIIGrid from "./components/ASCIIGrid";
+
+import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
+import Main from "./components/Main";
+import About from "./components/About";
+import Contacts from "./components/Contacts";
 
 function App() {
-    
     return (
-        <>
-            <ASCIIGrid></ASCIIGrid>
-            <section>
-                <span>hi,</span>
-                <span>I'm Luís</span>
-                <span>I DO DESIGN AND CODING</span>
-            </section>
-            <section>Who am I?</section>
-            <section>Find me</section>
-        </>
+        <Router>
+            <Main />
+            <About />
+            <Contacts />
+            <nav>
+                <ul>
+                    <li>
+                        <Link to="/#about">Who am I?</Link>
+                    </li>
+                    <li>
+                        <Link to="/#contacts">Find me</Link>
+                    </li>
+                </ul>
+            </nav>
+            <ASCIIGrid />
+            {/* <Routes>
+                <Route exact path={["/", "/#about", "/#how-to-use"]}>
+                        
+                </Route>
+            </Routes> */}
+        </Router>
     );
 }
 
