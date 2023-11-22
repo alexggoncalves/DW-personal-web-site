@@ -38,11 +38,8 @@ const ASCIIGrid = () => {
             }
         }
 
-        if(image1){
-            
-           image1.drawOnGrid(hResolution/(3*devicePixelRatio),vResolution/(2*devicePixelRatio),grid,cellWidth,cellHeight) 
-
-
+        if(image1 && frameCount % 6 == 0){  
+           image1.drawOnGrid(2*hResolution/(7*ratio),vResolution/(2*ratio),grid,cellWidth,cellHeight)
         }
     };
 

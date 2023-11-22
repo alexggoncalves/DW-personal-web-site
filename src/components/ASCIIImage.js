@@ -1,5 +1,6 @@
 import Char from "./Char";
 const ASCIIscale = [" ", ".", ",", "-", "~", "+", "*", "#", "%", "@"];
+// const ASCIIscale = [" ", ".", ",", "-", "~", "!", "l", "i", ";", ":","o","&","8","#","@"];
 
 const mapValue = (value, minIn, maxIn, minOut, maxOut) => {
     const output =
@@ -70,11 +71,12 @@ class ASCIIImage {
     drawOnGrid(startX, startY, grid, cellWidth, cellHeight) {
         if(!this.loaded) return
 
+        
         for (let i = 0; i < this.brightnessValues.length; i++) {
             const x = Math.floor(startX-this.width/2 + i % this.width);
             const y =  Math.floor(startY-this.height/2 + i / this.width);
 
-            const charIndex = mapValue(this.brightnessValues[i], 0, 250, 0, 9);
+            const charIndex = mapValue(this.brightnessValues[i], 0, 250, 0, ASCIIscale.length-1);
 
             const char = new Char(
                 x * cellWidth,

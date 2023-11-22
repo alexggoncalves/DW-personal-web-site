@@ -1,37 +1,31 @@
-import "./App.css";
 
-import { useRef } from "react";
 
-import ASCIIGrid from "./components/ASCIIGrid";
-
-import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 import Main from "./components/Main";
 import About from "./components/About";
 import Contacts from "./components/Contacts";
 
 function App() {
     return (
-        <Router>
+        <>
             <Main />
             <About />
             <Contacts />
-            <nav>
+            
+            <nav className="sticky_nav">
                 <ul>
                     <li>
-                        <Link to="/#about">Who am I?</Link>
+                        <a href="#main">Hello</a>
                     </li>
                     <li>
-                        <Link to="/#contacts">Find me</Link>
+                        <a href="#about">Who am I?</a>
+                    </li>
+                    <li>
+                        <a href="#contacts">Find me</a>
                     </li>
                 </ul>
             </nav>
-            <ASCIIGrid />
-            {/* <Routes>
-                <Route exact path={["/", "/#about", "/#how-to-use"]}>
-                        
-                </Route>
-            </Routes> */}
-        </Router>
+            
+        </>
     );
 }
 
