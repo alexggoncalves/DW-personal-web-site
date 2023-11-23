@@ -84,7 +84,7 @@ class ASCIIImage {
 
         for (let i = 0; i < this.brightnessValues.length; i++) {
             const x = Math.floor(this.x - this.width / 2 + (i % this.width));
-            const y = Math.floor(this.y - (this.height / 2) + (i / this.width));
+            const y = Math.floor(this.y - this.height / 2 + i / this.width);
 
             if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
                 const charIndex = mapValue(
@@ -100,11 +100,15 @@ class ASCIIImage {
                     y * cellHeight,
                     -1,
                     ASCIIscale[charIndex],
-                    'image'
+                    "image"
                 );
 
                 if (this.brightnessValues[i] > 0) {
                     grid[x][y] = char;
+                } else if (grid[x][y] != null) {
+                    if (grid[x][y].getType() == "image") {
+                        grid[x][y] = null;
+                    }
                 }
             }
         }

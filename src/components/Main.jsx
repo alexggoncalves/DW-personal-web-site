@@ -5,6 +5,7 @@ import ASCIIImage from "./ASCIIImage";
 const Main = () => {
 
     const image = new ASCIIImage("src/assets/catPixelated.png",40,40);
+    
     const sectionRef = useRef()
 
     return (

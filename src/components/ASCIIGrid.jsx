@@ -3,10 +3,12 @@ import Canvas from "./Canvas";
 import Char from "./Char";
 import ASCIIImage from "./ASCIIImage.js";
 
-const ASCIIGrid = ({ images, className, yPosition}) => {
+const ASCIIGrid = ({ images, animations, className, yPosition}) => {
     let size = { width: 0, height: 0 };
     let hResolution;
     let vResolution;
+    
+    const [frame,setFrame] = useState(0)
 
     const cellWidth = 10;
     const cellHeight = 10;
@@ -33,7 +35,17 @@ const ASCIIGrid = ({ images, className, yPosition}) => {
         }
     };
 
-    const drawASCIIAnimation = () => {};
+    const drawASCIIAnimation = (frameCount) => {
+        for(let a = 0; a < animations.length;a++){
+            if(animations[a].loaded){
+                animations[a].images[Math.floor(animations[a].speed * frameCount%24)].drawOnGrid(
+                    grid,
+                    cellWidth,
+                    cellHeight
+                );
+            }
+        }
+    };
 
     const drawASCIIGrid = (ctx, frameCount) => {
         size.width = ctx.canvas.width;
@@ -50,8 +62,14 @@ const ASCIIGrid = ({ images, className, yPosition}) => {
                 }
             }
         }
-
-        drawASCIIImages()
+        if(images){
+            drawASCIIImages()
+        }
+        
+        if(animations){
+            drawASCIIAnimation(frameCount)
+        }
+        
     };
 
     const handleMouseMove = (e) => {

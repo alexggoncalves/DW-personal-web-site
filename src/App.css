@@ -41,6 +41,7 @@ canvas {
 
 .grid-contacts {
     top: 200vh;
+    z-index: 0;
 }
 
 section {
@@ -197,6 +198,10 @@ h1 {
   transform: translateY(-50%);
 }
 
+#about p {
+    color: black;
+}
+
 /* Contacts Section */
 
 .contacts-container {
@@ -215,9 +220,6 @@ h1 {
     color: white;
 }
 
-.contact:hover {
-    color: pink;
-}
 
 .contact-icon {
     border-radius: 50%;

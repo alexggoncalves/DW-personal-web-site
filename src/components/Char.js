@@ -53,6 +53,10 @@ class Char {
     isDead() {
         return !this.alive;
     }
+
+    getType() {
+        return this.type;
+    }
 }
 
 export default Char;
