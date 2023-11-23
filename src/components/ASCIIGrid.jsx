@@ -1,55 +1,69 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import Canvas from "./Canvas";
 import Char from "./Char";
-import ASCIIImage from "./ASCIIImage.js"
+import ASCIIImage from "./ASCIIImage.js";
 
-const ASCIIGrid = () => {
+const ASCIIGrid = ({ images, className, yPosition}) => {
     let size = { width: 0, height: 0 };
-    let hResolution
-    let vResolution
+    let hResolution;
+    let vResolution;
 
-    const cellWidth = 8;
-    const cellHeight = 8;
+    const cellWidth = 10;
+    const cellHeight = 10;
 
-    const { devicePixelRatio:ratio=1 } = window
+    const { devicePixelRatio: ratio = 1 } = window;
 
-    let grid
-
-    let image1
+    let [grid,setGrid] = useState(null)
 
     const setupASCIIGrid = (ctx) => {
         ctx.font = `${cellHeight}px Fira Code`;
         ctx.textAlign = "center";
-        
     };
+
+    const drawASCIIImages = () => {
+        
+        if (images) {
+            for (let i = 0; i < images.length; i++) {
+                images[i].drawOnGrid(
+                    grid,
+                    cellWidth,
+                    cellHeight
+                );
+            }
+        }
+    };
+
+    const drawASCIIAnimation = () => {};
 
     const drawASCIIGrid = (ctx, frameCount) => {
         size.width = ctx.canvas.width;
         size.height = ctx.canvas.height;
+
         // draw background
         ctx.clearRect(0, 0, ctx.canvas.width, ctx.canvas.height);
 
         for (let i = 0; i < hResolution; i++) {
             for (let j = 0; j < vResolution; j++) {
                 if (grid[i][j] != null) {
-                    grid[i][j].drawChar(ctx);
+                    grid[i][j].drawChar(ctx,cellWidth,cellHeight);
                     if (grid[i][j].isDead()) grid[i][j] = null;
                 }
             }
         }
 
-        if(image1 && frameCount % 6 == 0){  
-           image1.drawOnGrid(2*hResolution/(7*ratio),vResolution/(2*ratio),grid,cellWidth,cellHeight)
-        }
+        drawASCIIImages()
     };
 
     const handleMouseMove = (e) => {
         const i = Math.round((e.clientX / size.width) * hResolution);
-        const j = Math.round((e.clientY / size.height) * vResolution);
+        const j = Math.round(((e.clientY) / size.height) * vResolution);
 
         if (i >= grid.size || j >= grid[0].size || grid[i][j] != null) return;
-
-        grid[i][j] = new Char(i * cellWidth, j * cellHeight + window.scrollY,200);
+        grid[i][j] = new Char(
+            i * cellWidth,
+            j * cellHeight + window.scrollY - yPosition,
+            200
+        );
     };
 
     useEffect(() => {
@@ -62,25 +76,20 @@ const ASCIIGrid = () => {
         };
         generateGrid();
 
-        // Create images to be translated into ascii
-        image1 = new ASCIIImage("src/assets/catPixelated.png")
-
-
-        window.addEventListener("resize", generateGrid);
-        window.addEventListener("mousemove", handleMouseMove);
+        document.addEventListener("resize", generateGrid);
+        document.addEventListener("mousemove", handleMouseMove);
 
         return () => {
-            window.removeEventListener("resize", generateGrid);
-            window.removeEventListener("mouseMove", handleMouseMove);
+            document.removeEventListener("resize", generateGrid);
+            document.removeEventListener("mouseMove", handleMouseMove);
         };
-        
     }, []);
 
     return (
         <Canvas
             setup={setupASCIIGrid}
             draw={drawASCIIGrid}
-            className={"ascii-grid"}
+            className={className}
         />
     );
 };

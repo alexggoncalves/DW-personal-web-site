@@ -1,7 +1,12 @@
+import MyPhoto from "../assets/my_photo.png";
+import ASCIIGrid from "./ASCIIGrid";
+
 const About = () => {
     return (
         <>
             <section id="about">
+                <ASCIIGrid className={"grid grid-about"} yPosition={window.innerHeight}/>
+                <img src={MyPhoto} alt="a photo of me"></img>
                 <div className="container left">
                     <h1>Who am I?</h1>
                     <p>

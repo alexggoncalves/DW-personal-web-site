@@ -6,7 +6,7 @@ const Canvas = (props) => {
 
     const canvasRef = useCanvas(setup,draw)
 
-    return <canvas ref={canvasRef}  {...rest} />;
+    return <canvas ref={canvasRef}  {...rest}/>;
 };
 
 export default Canvas;

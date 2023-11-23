@@ -9,7 +9,7 @@ const mapValue = (value, minIn, maxIn, minOut, maxOut) => {
 };
 
 class ASCIIImage {
-    constructor(path) {
+    constructor(path, x, y) {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
@@ -20,6 +20,9 @@ class ASCIIImage {
         image.onload = () => {
             this.width = image.width;
             this.height = image.height;
+
+            this.x = x;
+            this.y = y;
 
             // Draw image on canvas and get it's data
             ctx.canvas.width = this.width;
@@ -48,6 +51,14 @@ class ASCIIImage {
         return this.imageData;
     }
 
+    getX() {
+        return this.x;
+    }
+
+    getY() {
+        return this.y;
+    }
+
     // Calculates the perceived brightness in an srgb image
     // Return values in a range from 0 to 250
     calculateBrightness(r, g, b) {
@@ -68,25 +79,33 @@ class ASCIIImage {
     }
 
     // Draw characters with different densities on a grid based on each one of the image's pixel brightness
-    drawOnGrid(startX, startY, grid, cellWidth, cellHeight) {
-        if(!this.loaded) return
+    drawOnGrid(grid, cellWidth, cellHeight) {
+        if (!this.loaded) return;
 
-        
         for (let i = 0; i < this.brightnessValues.length; i++) {
-            const x = Math.floor(startX-this.width/2 + i % this.width);
-            const y =  Math.floor(startY-this.height/2 + i / this.width);
+            const x = Math.floor(this.x - this.width / 2 + (i % this.width));
+            const y = Math.floor(this.y - (this.height / 2) + (i / this.width));
 
-            const charIndex = mapValue(this.brightnessValues[i], 0, 250, 0, ASCIIscale.length-1);
+            if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
+                const charIndex = mapValue(
+                    this.brightnessValues[i],
+                    0,
+                    250,
+                    0,
+                    ASCIIscale.length - 1
+                );
 
-            const char = new Char(
-                x * cellWidth,
-                y * cellHeight,
-                -1,
-                ASCIIscale[charIndex]
-            );
+                const char = new Char(
+                    x * cellWidth,
+                    y * cellHeight,
+                    -1,
+                    ASCIIscale[charIndex],
+                    'image'
+                );
 
-            if (this.brightnessValues[i] > 0) {
-                grid[x][y] = char;
+                if (this.brightnessValues[i] > 0) {
+                    grid[x][y] = char;
+                }
             }
         }
     }
