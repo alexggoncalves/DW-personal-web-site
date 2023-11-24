@@ -14,22 +14,22 @@ const About = () => {
                     <div>
                         <h1>Who am I?</h1>
                         <p>
-                            Lorem ipsum dolor sit amet, consectetur adipiscing
-                            elit. Cras dictum maximus sapien in tincidunt. Sed
-                            in arcu id elit rhoncus cursus eget in dolor.
-                            Aliquam commodo metus vitae pretium interdum.
-                            Suspendisse ullamcorper, leo sit amet hendrerit
-                            vestibulum, augue dolor pellentesque enim, sed
-                            porttitor nisl sapien sit amet lectus. Fusce enim
-                            augue, vestibulum sit amet mauris vitae, semper
-                            congue odio. Sed rhoncus accumsan nunc, non bibendum
-                            ipsum posuere non.
+                            At the moment, I'm a master's student in Design and
+                            Multimedia at the University of Coimbra. My main
+                            areas of interest are 3D modeling, game
+                            design/development, and web development. I really
+                            enjoy bringing my imagination to life through
+                            interactive visual creations and immersive digital
+                            experiences. I am constantly honing my skills to
+                            push the boundaries of my skills and knowledge. Join
+                            me on my quest as I discover the endless realm of
+                            Digital Arts!
                         </p>
                     </div>
                     <img src={MyPhoto} alt="a photo of me"></img>
                 </div>
                 <div className="separator">
-                    <span>**********************************</span>
+                    <span>*********************</span>
                 </div>
             </section>
         </>

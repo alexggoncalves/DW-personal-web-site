@@ -3,19 +3,20 @@ import Canvas from "./Canvas";
 import Char from "./Char";
 import ASCIIImage from "./ASCIIImage.js";
 
-const ASCIIGrid = ({ images, animations, className, yPosition}) => {
+const maxScrollSpeed = 100;
+const scrollScale = 0.8;
+
+const ASCIIGrid = ({ images, animations, className, yPosition }) => {
     let size = { width: 0, height: 0 };
     let hResolution;
     let vResolution;
-    
-    const [frame,setFrame] = useState(0)
+
+    const [prevScrollY,setPrevScrollY] = useState(0)
 
     const cellWidth = 10;
     const cellHeight = 10;
 
-    const { devicePixelRatio: ratio = 1 } = window;
-
-    let [grid,setGrid] = useState(null)
+    let [grid, setGrid] = useState(null);
 
     const setupASCIIGrid = (ctx) => {
         ctx.font = `${cellHeight}px Fira Code`;
@@ -23,28 +24,23 @@ const ASCIIGrid = ({ images, animations, className, yPosition}) => {
     };
 
     const drawASCIIImages = () => {
-        
         if (images) {
             for (let i = 0; i < images.length; i++) {
-                images[i].drawOnGrid(
-                    grid,
-                    cellWidth,
-                    cellHeight
-                );
+                images[i].drawOnGrid(grid, cellWidth, cellHeight);
             }
         }
     };
 
     const drawASCIIAnimation = (frameCount) => {
-        for(let a = 0; a < animations.length;a++){
-            if(animations[a].loaded){
-                
 
-                animations[a].images[Math.floor(animations[a].speed * frameCount%24) + 1].drawOnGrid(
-                    grid,
-                    cellWidth,
-                    cellHeight
-                );
+        for (let a = 0; a < animations.length; a++) {
+            if (animations[a].loaded) {
+                animations[a].images[
+                    Math.floor(
+                        ((animations[a].speed) * frameCount) %
+                            animations[a].duration
+                    )
+                ].drawOnGrid(grid, cellWidth, cellHeight);
             }
         }
     };
@@ -59,24 +55,23 @@ const ASCIIGrid = ({ images, animations, className, yPosition}) => {
         for (let i = 0; i < hResolution; i++) {
             for (let j = 0; j < vResolution; j++) {
                 if (grid[i][j] != null) {
-                    grid[i][j].drawChar(ctx,cellWidth,cellHeight);
+                    grid[i][j].drawChar(ctx, cellWidth, cellHeight);
                     if (grid[i][j].isDead()) grid[i][j] = null;
                 }
             }
         }
-        if(images){
-            drawASCIIImages()
+        if (images) {
+            drawASCIIImages();
         }
-        
-        if(animations){
-            drawASCIIAnimation(frameCount)
+
+        if (animations) {
+            drawASCIIAnimation(frameCount);
         }
-        
     };
 
     const handleMouseMove = (e) => {
         const i = Math.round((e.clientX / size.width) * hResolution);
-        const j = Math.round(((e.clientY) / size.height) * vResolution);
+        const j = Math.round((e.clientY / size.height) * vResolution);
 
         if (i >= grid.size || j >= grid[0].size || grid[i][j] != null) return;
         grid[i][j] = new Char(

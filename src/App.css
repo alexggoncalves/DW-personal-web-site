@@ -1,11 +1,12 @@
 @import url("https://fonts.googleapis.com/css2?family=Fira+Code:wght@300;500&display=swap");
 @import url("https://fonts.googleapis.com/css2?family=Lekton:wght@400;700&display=swap");
+
+
 html {
     scroll-behavior: smooth;
     font-size: 1vw;
     font-family: "Lekton";
     text-align: left;
-    
 }
 
 #root,
@@ -15,6 +16,11 @@ body {
     margin: 0 0;
     padding: 0;
     overflow-x: hidden;
+}
+
+img {
+    user-select: none;
+    -webkit-user-drag: none;
 }
 
 a {
@@ -75,7 +81,6 @@ h1 {
     bottom: 0;
     transform: translateY(40%);
     height: 13rem;
-    
 }
 .separator span {
     height: 50%;
@@ -84,7 +89,7 @@ h1 {
 
 #about .separator {
     top: 200vh;
-    transform: translateY(-60%)
+    transform: translateY(-60%);
 }
 
 /* Colors */
@@ -152,7 +157,6 @@ h1 {
 .container.left {
     padding-left: 15%;
     padding-right: 15%;
-
 }
 
 .container.right {
@@ -222,7 +226,7 @@ h1 {
 /* About Section */
 
 #about img {
-    width: 20vw;
+    width: 15vw;
     height: fit-content;
 }
 
@@ -269,7 +273,16 @@ h1 {
     width: 3vw;
     height: 3vw;
     margin-right: 15px;
-    -webkit-user-drag: none;
+}
+
+.clickable:hover{
+    color: white;
+    background-color: #000;
+}
+
+.clickable:active{
+    color: black;
+    background-color: white;
 }
 
 @media only screen and (max-width: 600px) {
@@ -301,7 +314,7 @@ h1 {
         transform: translateY(50%);
         max-width: 80%;
     }
-    
+
     section {
         overflow: hidden;
     }
@@ -363,7 +376,7 @@ h1 {
 
 @media only screen and (min-width: 601px) and (max-width: 1024px) {
     html {
-        font-size: 1.5vw;
+        font-size: 1.4vw;
     }
     .sticky-nav {
         font-size: 2rem;
@@ -376,6 +389,15 @@ h1 {
         flex-direction: column;
     }
 
+    #contacts .container {
+        left: 0;
+    }
+
+    #about img {
+        width: 20vh;
+        position: relative;
+    }
+
     h1 {
         font-size: 5rem;
     }
@@ -384,9 +406,4 @@ h1 {
         margin: 0;
         font-size: 1.5rem;
     }
-    #about img {
-        width: 30vw;
-        padding: 5vh;
-    }
 }
-

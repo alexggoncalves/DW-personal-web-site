@@ -12,9 +12,7 @@ class ASCIIImage {
     constructor(path, x, y) {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
-
-        console.log(window.innerHeight); 
-
+        
         // create image and set path
         const image = new Image();
         image.src = path;
