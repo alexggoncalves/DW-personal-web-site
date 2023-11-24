@@ -21,7 +21,7 @@ const Contacts = () => {
 
     useEffect(() => {
         for (let i = 0; i < 60; i++) {
-            let src = "src/assets/antenna/";
+            let src = "../src/assets/antenna/";
             if (i < 10) {
                 src += `000${i}.png`;
             } else {

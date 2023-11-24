@@ -17,7 +17,7 @@ const Main = () => {
     
     useEffect(() => {
         for (let i = 0; i < 60; i++) {
-            let src = "src/assets/laptop/";
+            let src = "../src/assets/laptop/";
             if (i < 10) {
                 src += `000${i}.png`;
             } else {
