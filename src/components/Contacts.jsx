@@ -12,7 +12,6 @@ import phoneIcon from "../assets/icon-phone.png";
 
 
 const Contacts = () => {
-    const [frame,setFrame] = useState(0)
     const [speed,setSpeed] = useState(0.1)
 
     let antennaAnimation = {
@@ -23,7 +22,7 @@ const Contacts = () => {
     
     useEffect(()=>{
         for(let i = 0;i<25;i++){
-            antennaAnimation.images[i] = new ASCIIImage(`src/assets/antenna/${i}.png`,40,40)
+            antennaAnimation.images[i] = new ASCIIImage(`src/assets/antenna/${i}.png`,innerWidth/3,0.5*innerHeight)
             antennaAnimation.loaded = true;
         }
 
@@ -33,7 +32,7 @@ const Contacts = () => {
         <>
             <section id="contacts">
                 <ASCIIGrid
-                    className={"grid grid-contacts"}
+                    className={"grid"}
                     animations={[antennaAnimation]}
                     yPosition={window.innerHeight * 2}
                 />

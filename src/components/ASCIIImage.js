@@ -13,6 +13,8 @@ class ASCIIImage {
         const canvas = document.createElement("canvas");
         const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
+        console.log(window.innerHeight); 
+
         // create image and set path
         const image = new Image();
         image.src = path;
@@ -83,8 +85,8 @@ class ASCIIImage {
         if (!this.loaded) return;
 
         for (let i = 0; i < this.brightnessValues.length; i++) {
-            const x = Math.floor(this.x - this.width / 2 + (i % this.width));
-            const y = Math.floor(this.y - this.height / 2 + i / this.width);
+            const x = Math.floor(this.x/cellWidth - this.width / 2 + (i % this.width));
+            const y = Math.floor(this.y/cellHeight - this.height / 2 + i / this.width);
 
             if (x >= 0 && x < grid.length && y >= 0 && y < grid[0].length) {
                 const charIndex = mapValue(
@@ -94,7 +96,7 @@ class ASCIIImage {
                     0,
                     ASCIIscale.length - 1
                 );
-
+                    console.log();
                 const char = new Char(
                     x * cellWidth,
                     y * cellHeight,

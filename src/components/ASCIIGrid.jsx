@@ -38,7 +38,9 @@ const ASCIIGrid = ({ images, animations, className, yPosition}) => {
     const drawASCIIAnimation = (frameCount) => {
         for(let a = 0; a < animations.length;a++){
             if(animations[a].loaded){
-                animations[a].images[Math.floor(animations[a].speed * frameCount%24)].drawOnGrid(
+                
+
+                animations[a].images[Math.floor(animations[a].speed * frameCount%24) + 1].drawOnGrid(
                     grid,
                     cellWidth,
                     cellHeight
