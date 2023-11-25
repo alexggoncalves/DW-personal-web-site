@@ -9,6 +9,8 @@ import emailIcon from "../assets/icon-email.png";
 import instagramIcon from "../assets/icon-instagram.png";
 import phoneIcon from "../assets/icon-phone.png";
 
+import Antenna from "../assets/antenna/antenna"
+
 const Contacts = () => {
     const [speed, setSpeed] = useState(0.3);
 
@@ -21,15 +23,8 @@ const Contacts = () => {
 
     useEffect(() => {
         for (let i = 0; i < 60; i++) {
-            let src = "../src/assets/antenna/";
-            if (i < 10) {
-                src += `000${i}.png`;
-            } else {
-                src += `00${i}.png`;
-            }
-
             antennaAnimation.images[i] = new ASCIIImage(
-                src,
+                Antenna[i],
                 innerWidth / 3,
                 0.5 * innerHeight
             );

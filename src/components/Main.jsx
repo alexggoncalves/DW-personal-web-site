@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import ASCIIGrid from "./ASCIIGrid";
 import ASCIIImage from "./ASCIIImage";
 
-
+import Laptop from "../assets/laptop/laptop"
 
 
 
@@ -17,21 +17,15 @@ const Main = () => {
     
     useEffect(() => {
         for (let i = 0; i < 60; i++) {
-            let src = "../src/assets/laptop/";
-            if (i < 10) {
-                src += `000${i}.png`;
-            } else {
-                src += `00${i}.png`;
-            }
-
+            console.log(Laptop);
             laptopAnimation.images[i] = new ASCIIImage(
-                src,
+                Laptop[i],
                 innerWidth / 3,
                 0.5 * innerHeight
             );
             laptopAnimation.loaded = true;
         }
-    }, []);
+    }, [Laptop]);
 
     return (
         <>
